@@ -9,6 +9,8 @@ const chalk = require('chalk')
 const iconsDir = path.join(__dirname, '../icons/')
 const pagesDir = path.join(__dirname, '../docs/content/icons/')
 
+const VERBOSE = process.argv[2] === '--verbose'
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
@@ -29,8 +31,8 @@ tags:
 ---
 `
 
-      fs.access(pageName, fs.F_OK, err => {
-        if (err) {
+      fs.access(pageName, fs.F_OK, error => {
+        if (error) {
           fs.writeFile(pageName, pageTemplate, err => {
             if (err) {
               throw err
@@ -38,7 +40,7 @@ tags:
 
             console.log(chalk.green(`${iconBasename} successfully created`))
           })
-        } else {
+        } else if (VERBOSE) {
           console.log(chalk.cyan(`${iconBasename}: Permalink already exists`))
         }
       })
