@@ -157,8 +157,9 @@
 // stylelint-disable
 @font-face {
   font-family: bootstrap-icons;
-  src: url("../../font/fonts/bootstrap-icons.woff?1ef5213d557344d80e31924ac255216d") format("woff"),
-       url("../../font/fonts/bootstrap-icons.woff2?1ef5213d557344d80e31924ac255216d") format("woff2");
+  src: url("../../font/fonts/bootstrap-icons.woff2?5813790c1ebd573b51a03ec84367082a") format("woff2"),
+       url("../../font/fonts/bootstrap-icons.woff?5813790c1ebd573b51a03ec84367082a") format("woff")
+  font-display: block;
 }
 
 [class^="bi-"]::before,
