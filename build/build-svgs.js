@@ -36,6 +36,10 @@ const processFile = async (file, config) => {
   const svgo = await new SVGO(config)
   const optimizedSvg = await svgo.optimize(originalSvg)
 
+  if (optimizedSvg.data === originalSvg) {
+    return
+  }
+
   const $ = cheerio.load(optimizedSvg.data, {
     xml: {
       xmlMode: true
@@ -54,7 +58,9 @@ const processFile = async (file, config) => {
 
   const resultSvg = $svgElement.toString().replace(/\r\n?/g, '\n')
 
-  await fs.writeFile(filepath, resultSvg, 'utf8')
+  if (resultSvg !== originalSvg) {
+    await fs.writeFile(filepath, resultSvg, 'utf8')
+  }
 
   if (VERBOSE) {
     console.log(`- ${basename}`)
